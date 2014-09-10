@@ -9,10 +9,21 @@
     <servlet-name>Register</servlet-name>
     <servlet-class>self.kiwi.web.Register</servlet-class>
   </servlet>
+  <servlet>
+    <description>Check login info</description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>Event</servlet-name>
+    <servlet-class>self.kiwi.web.Event</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
     <url-pattern>/servlet/Register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Event</servlet-name>
+    <url-pattern>/servlet/Event</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -1,6 +1,9 @@
 package self.kiwi.test;
 
+import java.util.HashMap;
+
 import self.kiwi.dao.MemberDAO;
+import self.kiwi.event.RegisterEvent;
 import self.kiwi.model.GenericMember;
 
 public class Tester {
@@ -11,7 +14,7 @@ public class Tester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Tester().addUser();
+		new Tester().eventTester();
 
 	}
 	
@@ -24,6 +27,20 @@ public class Tester {
 		} catch (Exception e){
 			e.printStackTrace();
 		} 
+	}
+	
+	public void eventTester(){
+		RegisterEvent registerEvent = new RegisterEvent();
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		for (String parameter:registerEvent.getParameterList()){
+			hashMap.put(parameter, "kiwi");
+		}
+		registerEvent.runEvent(hashMap);
+		System.out.println(registerEvent.getUserID());
+		System.out.println(registerEvent.getAddExp());
+		System.out.println(registerEvent.getEventName());
+		System.out.println(registerEvent.getEventDate());
+		
 	}
 
 }

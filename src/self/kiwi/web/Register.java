@@ -14,6 +14,11 @@ import self.kiwi.model.GenericMember;
 public class Register extends HttpServlet {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6126981523044687676L;
+
+	/**
 	 * Constructor of the object.
 	 */
 	public Register() {
