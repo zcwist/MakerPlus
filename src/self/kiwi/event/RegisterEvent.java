@@ -1,12 +1,11 @@
 package self.kiwi.event;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import self.kiwi.dao.MemberDAO;
-import self.kiwi.model.MemberInfo;
 import self.kiwi.util.Transformer;
+import self.kiwi.util.XMLUtil;
 
 import com.mongodb.BasicDBObject;
 
@@ -38,12 +37,13 @@ public class RegisterEvent extends AbstractEvent{
 	@Override
 	public ArrayList<String> getParameterList() {
 		// TODO Auto-generated method stub
-		ArrayList<String> al = new ArrayList<String>();
-		Field[] fields = MemberInfo.class.getFields();
-		for (int i = 0; i < fields.length; i++){
-			al.add(fields[i].getName());
-		}
-		return al;
+//		ArrayList<String> al = new ArrayList<String>();
+//		Field[] fields = MemberInfo.class.getFields();
+//		for (int i = 0; i < fields.length; i++){
+//			al.add(fields[i].getName());
+//		}
+//		return al;
+		return XMLUtil.getParamListByEventName("registerEvent");
 	}
 	
 	

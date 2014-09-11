@@ -1,5 +1,6 @@
 package self.kiwi.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import self.kiwi.config.RootPath;
 import self.kiwi.event.AbstractEvent;
 
 public class Event extends HttpServlet {
@@ -46,6 +48,8 @@ public class Event extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		File file = new File("");
+		System.out.println(file.getAbsolutePath());
 
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
@@ -65,6 +69,7 @@ public class Event extends HttpServlet {
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				out.println("This class doesn't exsit ya!");
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -134,6 +139,9 @@ public class Event extends HttpServlet {
 	 */
 	public void init() throws ServletException {
 		// Put your code here
+		String path = getServletContext().getRealPath("/");
+		RootPath.getInstance().setRoot(path);
+		
 	}
 
 }
