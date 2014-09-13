@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import self.kiwi.config.RootPath;
 import self.kiwi.event.AbstractEvent;
+import self.kiwi.util.XMLUtil;
 
 public class Event extends HttpServlet {
 
@@ -55,7 +56,10 @@ public class Event extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (request.getParameter("EventName") == null){
 			//return Event list
-			out.println("Event List");
+			for  (String eventName: XMLUtil.getEventList()){
+				out.println(eventName);
+			}
+			
 			
 		} else {
 			//return the parameter needed of the event

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
 	<event>
-		<eventName>registerEvent</eventName>
+		<eventName>RegisterEvent</eventName>
 		<parameter>name</parameter>
 		<parameter>phoneNum</parameter>
 		<parameter>email</parameter>

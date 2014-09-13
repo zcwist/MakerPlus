@@ -46,4 +46,28 @@ public class XMLUtil {
 		return null;
 	}
 
+	public static ArrayList<String> getEventList(){
+		ArrayList<String> al = new ArrayList<String>();
+		try{
+			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dFactory.newDocumentBuilder();
+			Document doc;
+			String path = RootPath.getInstance().getRoot();
+			doc = builder.parse(new File(path + "/WEB-INF/EventConfig.xml"));
+
+			NodeList nl = doc.getElementsByTagName("eventName");
+
+			for (int i = 0; i < nl.getLength(); i++){
+				String node = nl.item(i).getFirstChild().getNodeValue();
+				al.add(node);
+				}
+			return al;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
+
+	}
+
 }

@@ -46,7 +46,8 @@ public class Tester {
 	}
 	public void XMLUtilTester(){
 		RootPath.getInstance().setRoot("WebRoot");
-		System.out.println(XMLUtil.getParamListByEventName("registerEvent").size());
+//		System.out.println(XMLUtil.getParamListByEventName("registerEvent").size());
+		System.out.println(XMLUtil.getEventList().get(0));
 	}
 
 }
