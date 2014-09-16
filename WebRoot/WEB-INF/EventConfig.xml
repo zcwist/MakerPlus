@@ -6,4 +6,8 @@
 		<parameter>phoneNum</parameter>
 		<parameter>email</parameter>
 	</event>
+	<event>
+		<eventName>SignInEvent</eventName>
+		<parameter>UserId</parameter>
+	</event>
 </events>
