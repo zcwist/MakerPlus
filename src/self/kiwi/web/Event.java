@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import self.kiwi.config.RootPath;
 import self.kiwi.event.AbstractEvent;
 import self.kiwi.event.DefaultEvent;
@@ -91,24 +94,32 @@ public class Event extends HttpServlet {
 			
 		} else {
 			//return the parameter needed of the event
-			String eventName = request.getParameter("EventName");
-			ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
-			HashMap<String, String> hashMap = new HashMap<String, String>();
-			for (String parameter: parameterList){
-				hashMap.put(parameter, request.getParameter(parameter));
+			try {
+				JSONObject jsonObj = new JSONObject(request.getParameter("dict"));
+				String eventName = request.getParameter("EventName");
+				ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
+				HashMap<String, String> hashMap = new HashMap<String, String>();
+				for (String parameter: parameterList){
+					hashMap.put(parameter, jsonObj.getString(parameter));
+				}
+				try { //For a special class that has a special model class
+					Class<?> c = Class.forName(RootPath.packagePath + eventName);
+					AbstractEvent event = (AbstractEvent) c.newInstance();
+					event.runEvent(hashMap);
+					out.println(event.getUserID());
+				} catch (Exception e) { // For a default class
+					// TODO: handle exception
+					AbstractEvent event = new DefaultEvent(eventName,hashMap.get("UserId"),XMLUtil.getAddExpByEventName(eventName));;
+					event.registerEvent();
+					
+				}
+				out.println("{\"succeed\"}");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			try { //For a special class that has a special model class
-				Class<?> c = Class.forName(RootPath.packagePath + eventName);
-				AbstractEvent event = (AbstractEvent) c.newInstance();
-				event.runEvent(hashMap);
-				out.println(event.getUserID());
-			} catch (Exception e) { // For a default class
-				// TODO: handle exception
-				AbstractEvent event = new DefaultEvent(eventName,hashMap.get("UserId"),XMLUtil.getAddExpByEventName(eventName));;
-				event.registerEvent();
-				
-			}
-			out.println("{\"succeed\"}");
+			
+			
 			
 		}
 		out.flush();
