@@ -86,7 +86,8 @@ public class Event extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (request.getParameter("EventName") == null){
@@ -95,8 +96,9 @@ public class Event extends HttpServlet {
 		} else {
 			//return the parameter needed of the event
 			try {
-				JSONObject jsonObj = new JSONObject(request.getParameter("dict"));
+				JSONObject jsonObj = new JSONObject(request.getParameter("data"));
 				String eventName = request.getParameter("EventName");
+				System.out.println(jsonObj);
 				ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
 				HashMap<String, String> hashMap = new HashMap<String, String>();
 				for (String parameter: parameterList){
@@ -113,7 +115,7 @@ public class Event extends HttpServlet {
 					event.registerEvent();
 					
 				}
-				out.println("{\"succeed\"}");
+//				out.println("{\"succeed\"}");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

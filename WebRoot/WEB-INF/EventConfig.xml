@@ -5,10 +5,16 @@
 		<parameter>name</parameter>
 		<parameter>phoneNum</parameter>
 		<parameter>email</parameter>
+		<parameter>QQ</parameter>
 		<addExp>1</addExp>
 	</event>
 	<event>
 		<eventName>SignInEvent</eventName>
+		<parameter>UserId</parameter>
+		<addExp>1</addExp>
+	</event>
+	<event>
+		<eventName>MarathonEvent</eventName>
 		<parameter>UserId</parameter>
 		<addExp>1</addExp>
 	</event>
