@@ -6,6 +6,7 @@ import self.kiwi.config.RootPath;
 import self.kiwi.dao.MemberDAO;
 import self.kiwi.event.RegisterEvent;
 import self.kiwi.model.GenericMember;
+import self.kiwi.util.Transformer;
 import self.kiwi.util.XMLUtil;
 
 public class Tester {
@@ -16,7 +17,7 @@ public class Tester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Tester().XMLUtilTester();
+		new Tester().jsonTester();
 
 	}
 	
@@ -45,9 +46,14 @@ public class Tester {
 		
 	}
 	public void XMLUtilTester(){
-		RootPath.getInstance().setRoot("WebRoot");
+		
 //		System.out.println(XMLUtil.getParamListByEventName("registerEvent").size());
 		System.out.println(XMLUtil.getEventList().get(0));
+	}
+	
+	public void jsonTester(){
+		RootPath.getInstance().setRoot("WebRoot");
+		System.out.println(Transformer.array2Json(XMLUtil.getEventList()).toString());
 	}
 
 }

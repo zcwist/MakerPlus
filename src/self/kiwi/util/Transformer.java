@@ -1,8 +1,11 @@
 package self.kiwi.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+
+import org.json.JSONArray;
 
 import com.mongodb.BasicDBObject;
 
@@ -15,5 +18,10 @@ public class Transformer {
 			object.append(entry.getKey(),entry.getValue());
 		}
 		return object;
+	}
+	
+	public static JSONArray array2Json(ArrayList<String> arrayList){
+		JSONArray jsonArray = new JSONArray(arrayList);
+		return jsonArray;
 	}
 }

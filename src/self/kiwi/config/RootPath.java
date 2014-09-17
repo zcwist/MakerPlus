@@ -3,6 +3,7 @@ package self.kiwi.config;
 public class RootPath {
 	private static RootPath rootPath;
 	private String root;
+	public static final String packagePath = "self.kiwi.event.";
 
 	public RootPath() {
 		// TODO Auto-generated constructor stub	

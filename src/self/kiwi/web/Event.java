@@ -1,6 +1,5 @@
 package self.kiwi.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import self.kiwi.config.RootPath;
 import self.kiwi.event.AbstractEvent;
+import self.kiwi.event.DefaultEvent;
+import self.kiwi.util.Transformer;
 import self.kiwi.util.XMLUtil;
 
 public class Event extends HttpServlet {
@@ -49,38 +50,19 @@ public class Event extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		File file = new File("");
-		System.out.println(file.getAbsolutePath());
-
-		response.setContentType("text/plain");
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (request.getParameter("EventName") == null){
 			//return Event list
-			for  (String eventName: XMLUtil.getEventList()){
-				out.println(eventName);
-			}
+			out.println(Transformer.array2Json(XMLUtil.getEventList()));
 			
 			
 		} else {
 			//return the parameter needed of the event
-			try {
-				Class<?> event = Class.forName("self.kiwi.event." + request.getParameter("EventName"));
-				ArrayList<String> parameterList = ((AbstractEvent) event.newInstance()).getParameterList();
-				for (String parameter: parameterList){
-					out.println(parameter);
-				}
-				
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				out.println("This class doesn't exsit ya!");
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			String eventName = request.getParameter("EventName");
+			ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
+			out.println(Transformer.array2Json(parameterList));
 			
 			
 			
@@ -102,35 +84,32 @@ public class Event extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/plain");
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (request.getParameter("EventName") == null){
-			//return Event list
 			out.println("Don't know what to do");
 			
 		} else {
 			//return the parameter needed of the event
-			try {
-				Class<?> event = Class.forName("self.kiwi.event." + request.getParameter("EventName"));
-				HashMap<String, String> hashMap = new HashMap<String, String>();
-				AbstractEvent objEvent = (AbstractEvent) event.newInstance();
-				ArrayList<String> parameterList = objEvent.getParameterList();
-				for (String parameter: parameterList){
-					hashMap.put(parameter, request.getParameter(parameter));
-				}
-				objEvent.runEvent(hashMap);
-				out.println("succeed");
+			String eventName = request.getParameter("EventName");
+			ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			for (String parameter: parameterList){
+				hashMap.put(parameter, request.getParameter(parameter));
+			}
+			try { //For a special class that has a special model class
+				Class<?> c = Class.forName(RootPath.packagePath + eventName);
+				AbstractEvent event = (AbstractEvent) c.newInstance();
+				event.runEvent(hashMap);
+				out.println(event.getUserID());
+			} catch (Exception e) { // For a default class
+				// TODO: handle exception
+				AbstractEvent event = new DefaultEvent(eventName,hashMap.get("UserId"),XMLUtil.getAddExpByEventName(eventName));;
+				event.registerEvent();
 				
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+			}
+			out.println("{\"succeed\"}");
+			
 		}
 		out.flush();
 		out.close();
