@@ -2,10 +2,13 @@
 <events>
 	<event>
 		<eventName>RegisterEvent</eventName>
-		<parameter>name</parameter>
-		<parameter>phoneNum</parameter>
-		<parameter>email</parameter>
-		<parameter>QQ</parameter>
+		<parameter>姓名</parameter>
+		<parameter>性别</parameter>
+		<parameter>学号</parameter>
+		<parameter>院系</parameter>
+		<parameter>班号</parameter>
+		<parameter>电话</parameter>
+		<parameter>电子邮箱</parameter>
 		<addExp>1</addExp>
 	</event>
 	<event>
