@@ -2,11 +2,19 @@ package self.kiwi.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+
+import self.kiwi.dao.EventDAO;
+
+import com.mongodb.BasicDBObject;
 
 public class Query extends HttpServlet {
 
@@ -43,6 +51,19 @@ public class Query extends HttpServlet {
 		//what the request want to query
 		String queryWhat = request.getParameter("What");
 		if (queryWhat.equals("SignInList")){
+			BasicDBObject queryObj = new BasicDBObject();
+			Pattern pattern = Pattern.compile("Oct 09"); 
+			queryObj.put("EventDate", pattern);
+			queryObj.put("EventName", "registerevent");
+			try {
+				EventDAO eventDAO = new EventDAO();
+				JSONArray idList = eventDAO.queryEvent(queryObj);
+				
+				out.println(eventDAO.queryMemberListInEvent(idList));
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		

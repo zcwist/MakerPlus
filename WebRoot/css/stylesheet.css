@@ -1,0 +1,20 @@
+.inner {
+  position: relative;
+  width: 1366px;
+  height: 768px;
+  margin: 0 auto;
+}
+.content{
+	padding-top: 350px;
+}
+.result_box{
+	margin:0 auto;
+	width:550px;
+	height: 350px;
+	padding:100px;
+	margin-bottom: 10px;
+	text-align:center;
+	border:3px solid #40AA53;
+	background:#efe;
+	font-size: 30pt;
+}

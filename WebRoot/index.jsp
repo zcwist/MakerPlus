@@ -4,23 +4,45 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+	<head>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/stylesheet.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="script.js"></script>
+		<title>开宝箱</title>
+	</head>
+	<body>
+		<div class="inner" style="background-image: url(pic/background.jpg); width=1336; height:768">
+			<div class="content">
+				<div class="container">
+					<div class="row">
+						
+						<div class="col-md-2 col-md-offset-5">
+							<div class="result_box" id="result">
+								抽奖结果
+							</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-6">
+							<button type="button" class="btn btn-success btn-lg btn-block" id="start">开始</button>
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-success btn-lg btn-block" id="end">结束</button>
+						</div>
+
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+
+
+	</body>
 </html>

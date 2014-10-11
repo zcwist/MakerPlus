@@ -1,5 +1,7 @@
 package self.kiwi.event;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +21,8 @@ public abstract class AbstractEvent {
 
 	public AbstractEvent() {
 		// TODO Auto-generated constructor stub
-		this.eventDate = new Date().toString();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.eventDate = format.format(new Date()).toString();
 	}
 
 	public String getEventName() {
