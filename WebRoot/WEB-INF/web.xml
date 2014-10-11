@@ -21,6 +21,13 @@
     <servlet-name>Tester</servlet-name>
     <servlet-class>self.kiwi.web.Tester</servlet-class>
   </servlet>
+  <servlet>
+    <description>Check login info</description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>Query</servlet-name>
+    <servlet-class>self.kiwi.web.Query</servlet-class>
+  </servlet>
+
 
 
 
@@ -35,6 +42,10 @@
   <servlet-mapping>
     <servlet-name>Tester</servlet-name>
     <url-pattern>/servlet/Tester</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Query</servlet-name>
+    <url-pattern>/servlet/Query</url-pattern>
   </servlet-mapping>
 
 </web-app>
