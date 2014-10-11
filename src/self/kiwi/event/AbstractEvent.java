@@ -14,6 +14,8 @@ public abstract class AbstractEvent {
 	protected String addExp;
 	private String eventDate;
 	protected String userID;
+	private BasicDBObject memberInfo;
+	
 
 	public AbstractEvent() {
 		// TODO Auto-generated constructor stub
@@ -38,6 +40,10 @@ public abstract class AbstractEvent {
 		return userID;
 	}
 	
+	public BasicDBObject getMemberInfo(){
+		return memberInfo;
+	}
+	
 	public void registerEvent(){
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("EventName", eventName);
@@ -48,6 +54,8 @@ public abstract class AbstractEvent {
 		try{
 			EventDAO eventDAO = new EventDAO();
 			eventDAO.insertNewEvent(object);
+			//get member info from member_list_coll
+			memberInfo = (BasicDBObject) eventDAO.queryMemberInfoByMemberId(userID);
 			eventDAO.destroy();
 		} catch (Exception e){
 			e.printStackTrace();

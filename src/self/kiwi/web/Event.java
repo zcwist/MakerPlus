@@ -97,8 +97,8 @@ public class Event extends HttpServlet {
 			//return the parameter needed of the event
 			try {
 				JSONObject jsonObj = new JSONObject(request.getParameter("data"));
-				String eventName = request.getParameter("EventName");
 				System.out.println(jsonObj);
+				String eventName = request.getParameter("EventName");
 				ArrayList<String> parameterList = XMLUtil.getParamListByEventName(eventName);
 				HashMap<String, String> hashMap = new HashMap<String, String>();
 				for (String parameter: parameterList){
@@ -108,14 +108,15 @@ public class Event extends HttpServlet {
 					Class<?> c = Class.forName(RootPath.packagePath + eventName);
 					AbstractEvent event = (AbstractEvent) c.newInstance();
 					event.runEvent(hashMap);
+					
 					out.println(event.getUserID());
 				} catch (Exception e) { // For a default class
 					// TODO: handle exception
 					AbstractEvent event = new DefaultEvent(eventName,hashMap.get("UserId"),XMLUtil.getAddExpByEventName(eventName));;
 					event.registerEvent();
+					out.println(event.getMemberInfo());
 					
 				}
-//				out.println("{\"succeed\"}");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -1,8 +1,10 @@
 package self.kiwi.test;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import self.kiwi.config.RootPath;
+import self.kiwi.dao.EventDAO;
 import self.kiwi.dao.MemberDAO;
 import self.kiwi.event.RegisterEvent;
 import self.kiwi.model.GenericMember;
@@ -17,7 +19,7 @@ public class Tester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Tester().jsonTester();
+		new Tester().getMemberInfo();
 
 	}
 	
@@ -54,6 +56,17 @@ public class Tester {
 	public void jsonTester(){
 		RootPath.getInstance().setRoot("WebRoot");
 		System.out.println(Transformer.array2Json(XMLUtil.getEventList()).toString());
+	}
+	
+	public void getMemberInfo(){
+		try {
+			EventDAO eventDAO = new EventDAO();
+			System.out.println(eventDAO.queryMemberInfoByMemberId("5436019596bcae3914718228"));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

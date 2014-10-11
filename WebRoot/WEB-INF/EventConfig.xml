@@ -21,4 +21,9 @@
 		<parameter>UserId</parameter>
 		<addExp>1</addExp>
 	</event>
+	<event>
+		<eventName>CheckEvent</eventName>
+		<parameter>UserId</parameter>
+		<addExp>1</addExp>
+	</event>
 </events>
