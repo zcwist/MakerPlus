@@ -24,6 +24,11 @@
 	<event>
 		<eventName>CheckEvent</eventName>
 		<parameter>UserId</parameter>
-		<addExp>1</addExp>
+		<addExp>10</addExp>
+	</event>
+		<event>
+		<eventName>LotteryEvent</eventName>
+		<parameter>UserId</parameter>
+		<addExp>15</addExp>
 	</event>
 </events>

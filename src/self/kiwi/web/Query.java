@@ -3,6 +3,9 @@ package self.kiwi.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -52,9 +55,14 @@ public class Query extends HttpServlet {
 		String queryWhat = request.getParameter("What");
 		if (queryWhat.equals("SignInList")){
 			BasicDBObject queryObj = new BasicDBObject();
-			Pattern pattern = Pattern.compile("Oct 09"); 
+			
+			Date date = new Date();
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String today = format.format(date);
+			
+			Pattern pattern = Pattern.compile(today); 
 			queryObj.put("EventDate", pattern);
-			queryObj.put("EventName", "registerevent");
+			queryObj.put("EventName", "CheckEvent");
 			try {
 				EventDAO eventDAO = new EventDAO();
 				JSONArray idList = eventDAO.queryEvent(queryObj);
