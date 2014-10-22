@@ -26,9 +26,25 @@
 		<parameter>UserId</parameter>
 		<addExp>10</addExp>
 	</event>
-		<event>
+	<event>
 		<eventName>LotteryEvent</eventName>
 		<parameter>UserId</parameter>
 		<addExp>15</addExp>
 	</event>
+	<event>
+		<eventName>ElevatorSpeech</eventName>
+		<parameter>UserId</parameter>
+		<addExp>15</addExp>
+	</event>
+	<event>
+		<eventName>FirstToFinish</eventName>
+		<parameter>UserId</parameter>
+		<addExp>15</addExp>
+	</event>
+	<event>
+		<eventName>WorkshopMisionCompleted</eventName>
+		<parameter>UserId</parameter>
+		<addExp>5</addExp>
+	</event>
+	
 </events>
