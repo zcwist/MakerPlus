@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var allPhoneArr = [];
 	var num;
 
-	$.get('Http://localhost:8080/makerPlus/servlet/Query?What=SignInList', function(data) {
+	$.get('servlet/Query?What=SignInList', function(data) {
 		/*optional stuff to do after success */
 		console.log(data);
 		num = data.length-1;
