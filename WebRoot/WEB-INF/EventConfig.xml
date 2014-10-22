@@ -31,4 +31,10 @@
 		<parameter>UserId</parameter>
 		<addExp>15</addExp>
 	</event>
+	</event>
+		<event>
+		<eventName>Speech</eventName>
+		<parameter>UserId</parameter>
+		<addExp>10</addExp>
+	</event>
 </events>
