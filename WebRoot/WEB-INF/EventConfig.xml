@@ -46,5 +46,25 @@
 		<parameter>UserId</parameter>
 		<addExp>5</addExp>
 	</event>
+	<event>
+		<eventName>GiveBrainStormSpeech</eventName>
+		<parameter>UserId</parameter>
+		<addExp>10</addExp>
+	</event>
+	<event>
+		<eventName>MostCreative</eventName>
+		<parameter>UserId</parameter>
+		<addExp>15</addExp>
+	</event>
+	<event>
+		<eventName>BestPrototype</eventName>
+		<parameter>UserId</parameter>
+		<addExp>15</addExp>
+	</event>
+	<event>
+		<eventName>MostCommented</eventName>
+		<parameter>UserId</parameter>
+		<addExp>5</addExp>
+	</event>
 	
 </events>
